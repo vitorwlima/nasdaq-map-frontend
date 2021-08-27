@@ -19,6 +19,15 @@ export const Container = styled.main`
     margin-top: ${theme.spacing.medium};
   }
 
+  .cadastro {
+    align-self: center;
+    margin-top: ${theme.spacing.large};
+
+    a {
+      color: ${theme.color.primary};
+    }
+  }
+
   @media ${deviceMaxWidth.tablet} {
     padding: 0 4%;
   }

@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { useRef } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Form } from '@unform/web'
 import { FormHandles, SubmitHandler } from '@unform/core'
@@ -52,6 +53,12 @@ const Login: NextPage = () => {
           Entrar
         </Button>
       </Form>
+      <div className='cadastro'>
+        Não tem cadastro?{' '}
+        <Link href='/cadastro'>
+          <a>Cadastre-se</a>
+        </Link>
+      </div>
     </S.Container>
   )
 }
