@@ -11,14 +11,25 @@ export default createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-
     font-family: 'Montserrat', sans-serif;
     font-size: ${theme.font.size.medium};
+  }
+
+  h1 {
+    font-size: ${theme.font.size.xxlarge};
+    font-weight: ${theme.font.weight.bold};
   }
 
   * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;  
+  }
+
+  button, input, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    border: none;
   }
 `

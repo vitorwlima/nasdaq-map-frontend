@@ -29,6 +29,21 @@ const theme = {
     success: '#79C300',
     danger: '#D64B45',
   },
+
+  spacing: {
+    xsmall: '0.8em',
+    small: '1.6em',
+    medium: '2.4em',
+    large: '3.6em',
+    xlarge: '4.8em',
+  },
+
+  radius: {
+    small: '0.4em',
+    medium: '0.8em',
+    large: '1.6em',
+    pill: '999px',
+  },
 }
 
 export default theme
