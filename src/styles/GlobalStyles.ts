@@ -3,8 +3,6 @@ import { deviceMaxWidth } from './devices'
 import theme from './theme'
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
-
   html {
     font-size: 10px;
 

@@ -1,3 +1,4 @@
+import '../styles/fonts.css'
 import GlobalStyles from '../styles/GlobalStyles'
 import type { AppProps } from 'next/app'
 
