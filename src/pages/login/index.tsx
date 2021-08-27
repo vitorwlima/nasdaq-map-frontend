@@ -43,17 +43,15 @@ const Login: NextPage = () => {
         <title>Nasdaq Map | Login</title>
         <meta name='description' content='Página de login da aplicação Nasdaq Map' />
       </Head>
-      <main>
-        <Image src='/logo.svg' width='100' height='100' alt='Nasdaq Map' />
-        <h1>Bem-vindo(a) de volta ao Nasdaq Map</h1>
-        <Form onSubmit={handleLogin} ref={formRef}>
-          <Input name='email' placeholder='Endereço de e-mail' />
-          <Input name='password' placeholder='Senha' type='password' />
-          <Button type='submit' fullWidth>
-            Entrar
-          </Button>
-        </Form>
-      </main>
+      <Image src='/logo.svg' width='100' height='100' alt='Nasdaq Map' />
+      <h1>Bem-vindo(a) de volta ao Nasdaq Map</h1>
+      <Form onSubmit={handleLogin} ref={formRef}>
+        <Input name='email' placeholder='Endereço de e-mail' />
+        <Input name='password' placeholder='Senha' type='password' />
+        <Button type='submit' fullWidth>
+          Entrar
+        </Button>
+      </Form>
     </S.Container>
   )
 }
