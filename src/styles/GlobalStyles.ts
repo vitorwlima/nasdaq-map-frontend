@@ -18,9 +18,20 @@ export default createGlobalStyle`
     font-size: ${theme.font.size.medium};
   }
 
+  h1, h2, h3 {
+    font-weight: ${theme.font.weight.bold};
+  }
+
   h1 {
     font-size: ${theme.font.size.xxlarge};
-    font-weight: ${theme.font.weight.bold};
+  }
+
+  h2 {
+    font-size: ${theme.font.size.xlarge};
+  }
+
+  h3 {
+    font-size: ${theme.font.size.large};
   }
 
   * {
