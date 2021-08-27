@@ -9,7 +9,7 @@ export default createGlobalStyle`
     font-size: 10px;
 
     @media ${deviceMaxWidth.tablet} {
-      font-size: 8px;
+      font-size: 9px;
     }
   }
 

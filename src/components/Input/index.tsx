@@ -7,7 +7,7 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string
 }
 
-const Input = ({ name, placeholder, ...rest }: InputProps) => {
+export const Input = ({ name, placeholder, ...rest }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const [isFocused, setIsFocused] = useState(false)
@@ -43,5 +43,3 @@ const Input = ({ name, placeholder, ...rest }: InputProps) => {
     </S.Container>
   )
 }
-
-export default Input
