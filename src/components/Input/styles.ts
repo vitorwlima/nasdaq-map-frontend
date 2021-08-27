@@ -29,9 +29,9 @@ export const Label = styled.label`
   pointer-events: none;
   position: absolute;
   top: 15px;
-  left: 8px;
+  left: 15px;
   font-weight: 400;
-  font-size: 1.4rem;
+  font-size: 14px;
   color: ${theme.color.gray};
   transition: all 0.3s ease-out;
 `
@@ -57,7 +57,6 @@ export const Input = styled.input`
   &:focus + ${Label}, &:not(:placeholder-shown) + ${Label} {
     font-size: 12px;
     top: 8px;
-    left: 15px;
   }
 `
 

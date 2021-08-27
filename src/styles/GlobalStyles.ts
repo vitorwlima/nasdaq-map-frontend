@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { deviceMaxWidth } from './devices'
 import theme from './theme'
 
 export default createGlobalStyle`
@@ -6,6 +7,10 @@ export default createGlobalStyle`
 
   html {
     font-size: 10px;
+
+    @media ${deviceMaxWidth.tablet} {
+      font-size: 8px;
+    }
   }
 
   body {

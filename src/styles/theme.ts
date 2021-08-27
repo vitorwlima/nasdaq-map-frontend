@@ -31,11 +31,11 @@ const theme = {
   },
 
   spacing: {
-    xsmall: '0.8em',
-    small: '1.6em',
-    medium: '2.4em',
-    large: '3.6em',
-    xlarge: '4.8em',
+    xsmall: '0.8rem',
+    small: '1.6rem',
+    medium: '2.4rem',
+    large: '3.6rem',
+    xlarge: '4.8rem',
   },
 
   radius: {

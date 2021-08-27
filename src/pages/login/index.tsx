@@ -17,9 +17,10 @@ const Login: NextPage = () => {
       <main>
         <Image src='/logo.svg' width='100' height='100' alt='Nasdaq Map' />
         <h1>Bem-vindo(a) de volta ao Nasdaq Map</h1>
-        <Button>oi</Button>
         <Form onSubmit={e => console.log(e)}>
           <Input name='email' placeholder='Endereço de e-mail' />
+          <Input name='password' placeholder='Senha' />
+          <Button fullWidth>Continuar</Button>
         </Form>
       </main>
     </S.Container>

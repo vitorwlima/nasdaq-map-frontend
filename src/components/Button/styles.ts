@@ -7,7 +7,7 @@ type ButtonProps = {
 
 export const Container = styled.button<ButtonProps>`
   background-color: ${theme.color.primary};
-  padding: ${theme.spacing.xsmall} ${theme.spacing.medium};
+  padding: ${theme.spacing.small} ${theme.spacing.large};
   border-radius: ${theme.radius.pill};
   color: ${theme.color.white};
   width: ${props => props.fullWidth && '100%'};
