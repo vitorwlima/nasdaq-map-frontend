@@ -6,6 +6,7 @@ import DashboardIcon from '../../assets/dashboard.svg'
 import SearchIcon from '../../assets/search.svg'
 import { Input } from '../'
 import { Form } from '@unform/web'
+import { Chart } from '../Chart'
 
 export const Dashboard = () => {
   return (
@@ -17,6 +18,7 @@ export const Dashboard = () => {
       <Form onSubmit={() => console.log('oi')}>
         <Input name='company' placeholder='Buscar empresa' icon={SearchIcon} />
       </Form>
+      <Chart />
     </S.Container>
   )
 }
