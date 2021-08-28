@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IUser } from '../../interfaces'
+import api from '../../services/api'
 
 type InitialState = {
   user: IUser | null
-  token: string
 }
 
 const initialState: InitialState = {
   user: null,
-  token: '',
 }
 
 const userSlice = createSlice({
@@ -17,7 +16,7 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload.user
-      state.token = action.payload.token
+      api.defaults.headers['Authorization'] = `Bearer ${action.payload.token}`
     },
   },
 })
