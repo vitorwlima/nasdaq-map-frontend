@@ -9,9 +9,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 120px;
-  max-width: 120px;
-  width: 120px;
+  min-width: 100px;
+  max-width: 100px;
+  width: 100px;
   padding: ${theme.spacing.medium} 0;
   height: 100vh;
   flex: 1;
