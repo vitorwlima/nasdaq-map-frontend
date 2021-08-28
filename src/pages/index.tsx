@@ -8,7 +8,7 @@ import { setUser } from '../state/slices/UserSlice'
 import { HomeTemplate } from '../templates'
 
 const Home: NextPage = () => {
-  const user = useAppSelector(state => state.user)
+  const user = useAppSelector(state => state.userReducer.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
 

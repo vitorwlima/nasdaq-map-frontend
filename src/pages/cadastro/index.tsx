@@ -25,7 +25,7 @@ type IFormData = {
 const Register: NextPage = () => {
   const formRef = useRef<FormHandles>(null)
   const dispatch = useAppDispatch()
-  const user = useAppSelector(state => state.user)
+  const user = useAppSelector(state => state.userReducer.user)
   const router = useRouter()
 
   useEffect(() => {

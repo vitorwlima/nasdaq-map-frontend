@@ -11,7 +11,7 @@ import api from '../../services/api'
 import { setUser } from '../../state/slices/UserSlice'
 
 export const UserCard = () => {
-  const user = useAppSelector(state => state.user)!
+  const user = useAppSelector(state => state.userReducer.user)!
   const dispatch = useAppDispatch()
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
 

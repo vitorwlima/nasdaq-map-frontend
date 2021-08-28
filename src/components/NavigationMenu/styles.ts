@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { deviceMaxWidth } from '../../styles/devices'
 import theme from '../../styles/theme'
 
 type NavigationItemProps = {
@@ -15,6 +16,15 @@ export const Container = styled.div`
   padding: ${theme.spacing.medium} 0;
   height: 100vh;
   flex: 1;
+
+  @media ${deviceMaxWidth.laptopM} {
+    flex-direction: row;
+    justify-content: space-between;
+    width: unset;
+    max-width: none;
+    padding: ${theme.spacing.small} ${theme.spacing.medium};
+    max-height: 80px;
+  }
 `
 
 export const NavigationItems = styled.nav`
@@ -25,6 +35,10 @@ export const NavigationItems = styled.nav`
 
   a {
     width: 100%;
+  }
+
+  @media ${deviceMaxWidth.laptopM} {
+    display: none;
   }
 `
 
@@ -43,5 +57,18 @@ export const NavigationItem = styled.div<NavigationItemProps>`
     left: -6px;
     bottom: calc(50% - 40px);
     border-radius: ${theme.radius.pill};
+  }
+`
+
+export const MobileMenu = styled.div`
+  display: none;
+
+  @media ${deviceMaxWidth.laptopM} {
+    display: flex;
+
+    svg {
+      height: 2rem;
+      width: 2rem;
+    }
   }
 `

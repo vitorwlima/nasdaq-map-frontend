@@ -33,9 +33,10 @@ export const Container = styled.div<ContainerProps>`
 `
 
 export const UserMenu = styled.div<UserMenuProps>`
-  transition: opacity 0.3s;
+  transition: all 0.3s;
   opacity: ${props => (props.open ? '1' : '0')};
   pointer-events: ${props => (props.open ? 'all' : 'none')};
+  margin-bottom: ${props => props.open && theme.spacing.medium};
   padding: ${theme.spacing.small};
 
   button {

@@ -43,6 +43,11 @@ export default createGlobalStyle`
     font-size: ${theme.font.size.medium};
   }
 
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   * {
     box-sizing: border-box;
     padding: 0;
