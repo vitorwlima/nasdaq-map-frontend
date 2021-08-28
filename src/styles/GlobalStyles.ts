@@ -39,6 +39,10 @@ export default createGlobalStyle`
     font-size: ${theme.font.size.xmedium};
   }
 
+  h5, h6 {
+    font-size: ${theme.font.size.medium};
+  }
+
   * {
     box-sizing: border-box;
     padding: 0;
