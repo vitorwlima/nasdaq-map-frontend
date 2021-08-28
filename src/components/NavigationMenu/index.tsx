@@ -2,14 +2,14 @@ import Image from 'next/image'
 import React from 'react'
 import * as S from './styles'
 
-import DashboardIcon from '../../assets/dashboard.svg'
+import HomeIcon from '../../assets/home.svg'
 import Link from 'next/link'
 
 export const NavigationMenu = () => {
   const navigationItems = [
     {
-      name: 'Dashboard',
-      icon: DashboardIcon,
+      name: 'Home',
+      icon: HomeIcon,
       path: '/',
     },
   ]
