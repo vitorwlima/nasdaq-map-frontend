@@ -11,6 +11,9 @@ import * as Yup from 'yup'
 import { getValidationErrors } from '../../utils'
 import { Button, Input } from '../../components/'
 import * as S from './styles'
+import { useAppDispatch } from '../../hooks'
+import api from '../../services/api'
+import { setUser } from '../../state/slices/UserSlice'
 
 type IFormData = {
   email: string
@@ -19,6 +22,7 @@ type IFormData = {
 
 const Login: NextPage = () => {
   const formRef = useRef<FormHandles>(null)
+  const dispatch = useAppDispatch()
 
   const handleLogin: SubmitHandler<IFormData> = async formData => {
     try {
@@ -30,6 +34,9 @@ const Login: NextPage = () => {
       })
 
       await schema.validate(formData, { abortEarly: false })
+
+      const { data } = await api.post('/login', { email: formData.email, password: formData.password })
+      dispatch(setUser(data))
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err)
