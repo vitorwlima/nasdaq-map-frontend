@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppSelector } from '../../hooks'
 import * as S from './styles'
-import { Dashboard, NavigationMenu } from '../../components'
+import { Dashboard, MainMenu, NavigationMenu } from '../../components'
 
 export const HomeTemplate = () => {
   const user = useAppSelector(state => state.user)!
@@ -10,6 +10,7 @@ export const HomeTemplate = () => {
     <S.Container>
       <NavigationMenu />
       <Dashboard />
+      <MainMenu />
     </S.Container>
   )
 }

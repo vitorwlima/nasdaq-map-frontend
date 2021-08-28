@@ -1,4 +1,4 @@
-import { shade } from 'polished'
+import { shade, transparentize } from 'polished'
 
 const theme = {
   font: {
@@ -23,6 +23,7 @@ const theme = {
   color: {
     primary: '#0047BB',
     darkPrimary: shade(0.2, '#0047BB'),
+    opaquePrimary: transparentize(0.5, '#0047BB'),
     secondary: '#F06400',
     black: '#14171A',
     gray: '#657786',
@@ -30,6 +31,7 @@ const theme = {
     white: '#FFFFFF',
     success: '#79C300',
     danger: '#D64B45',
+    darkDanger: shade(0.2, '#D64B45'),
   },
 
   spacing: {
