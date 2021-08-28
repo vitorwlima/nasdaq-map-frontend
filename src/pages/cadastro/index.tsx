@@ -38,7 +38,7 @@ const Register: NextPage = () => {
         return
       }
 
-      router.push('/')
+      router.push('/dashboard')
     }
 
     redirectUser()

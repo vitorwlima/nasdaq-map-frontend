@@ -19,7 +19,7 @@ export const MainMenu = () => {
     {
       name: 'Dashboard',
       icon: HomeIcon,
-      path: '/',
+      path: '/dashboard',
     },
   ]
 
@@ -39,7 +39,7 @@ export const MainMenu = () => {
         {navigationItems.map(navItem => (
           <Link key={navItem.path} href={navItem.path}>
             <a>
-              <S.NavigationItem isActive={navItem.path === window.location.pathname}>
+              <S.NavigationItem isActive={window.location.pathname.includes(navItem.path)}>
                 <Image src={navItem.icon} width='40' height='40' alt={navItem.name} />
                 <h3>{navItem.name}</h3>
                 <div className='active-label'></div>

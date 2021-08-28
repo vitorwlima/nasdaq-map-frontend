@@ -37,7 +37,7 @@ const Login: NextPage = () => {
         return
       }
 
-      router.push('/')
+      router.push('/dashboard')
     }
 
     redirectUser()
