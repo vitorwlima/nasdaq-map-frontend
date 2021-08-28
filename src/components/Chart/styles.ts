@@ -41,6 +41,7 @@ export const AssetPrices = styled.div`
   .top {
     display: flex;
     align-items: center;
+    margin-bottom: ${theme.spacing.xxsmall};
 
     h4 {
       margin-left: ${theme.spacing.xxsmall};
