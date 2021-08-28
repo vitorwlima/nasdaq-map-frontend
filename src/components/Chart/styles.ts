@@ -5,6 +5,7 @@ export const Container = styled.div`
   background-color: ${theme.color.white};
   padding: ${theme.spacing.medium};
   border-radius: ${theme.radius.medium};
+  box-shadow: 0 4px 12px rgba(222, 222, 231, 0.4);
 `
 
 export const Header = styled.header`
