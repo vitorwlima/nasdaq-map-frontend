@@ -4,9 +4,8 @@ import * as S from './styles'
 
 import DashboardIcon from '../../assets/dashboard.svg'
 import SearchIcon from '../../assets/search.svg'
-import { Input } from '../'
+import { Chart, Input } from '../'
 import { Form } from '@unform/web'
-import { Chart } from '../Chart'
 
 export const Dashboard = () => {
   return (
