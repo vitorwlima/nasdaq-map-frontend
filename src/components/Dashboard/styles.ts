@@ -6,6 +6,7 @@ export const Container = styled.section`
   flex: 1;
   border-top-left-radius: 40px;
   padding: ${theme.spacing.large} ${theme.spacing.medium};
+  overflow: hidden;
 
   form {
     margin-top: ${theme.spacing.small};

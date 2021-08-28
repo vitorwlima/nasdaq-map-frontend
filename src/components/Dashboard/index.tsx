@@ -4,7 +4,7 @@ import * as S from './styles'
 
 import DashboardIcon from '../../assets/dashboard.svg'
 import SearchIcon from '../../assets/search.svg'
-import { Chart, Input } from '../'
+import { Chart, Input, RecentCompanies } from '../'
 import { Form } from '@unform/web'
 
 export const Dashboard = () => {
@@ -18,6 +18,7 @@ export const Dashboard = () => {
         <Input name='company' placeholder='Buscar empresa' icon={SearchIcon} />
       </Form>
       <Chart />
+      <RecentCompanies />
     </S.Container>
   )
 }
