@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -11,6 +11,10 @@ import * as Yup from 'yup'
 import * as S from './styles'
 import { Button, Input } from '../../components'
 import { getValidationErrors } from '../../utils'
+import api from '../../services/api'
+import { setUser } from '../../state/slices/UserSlice'
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { useRouter } from 'next/dist/client/router'
 
 type IFormData = {
   name: string
@@ -20,8 +24,27 @@ type IFormData = {
 
 const Register: NextPage = () => {
   const formRef = useRef<FormHandles>(null)
+  const dispatch = useAppDispatch()
+  const user = useAppSelector(state => state.user)
+  const router = useRouter()
 
-  const handleRegister: SubmitHandler<IFormData> = async formData => {
+  useEffect(() => {
+    const redirectUser = async () => {
+      if (!user) {
+        try {
+          const { data } = await api.get('/refresh-token')
+          dispatch(setUser(data))
+        } catch {}
+        return
+      }
+
+      router.push('/')
+    }
+
+    redirectUser()
+  }, [user, dispatch, router])
+
+  const handleRegister: SubmitHandler<IFormData> = async ({ name, email, password }) => {
     try {
       formRef.current!.setErrors({})
 
@@ -31,7 +54,10 @@ const Register: NextPage = () => {
         password: Yup.string().required('Insira a sua senha.'),
       })
 
-      await schema.validate(formData, { abortEarly: false })
+      await schema.validate({ name, email, password }, { abortEarly: false })
+
+      const { data } = await api.post('/register', { name, email, password })
+      dispatch(setUser(data))
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err)

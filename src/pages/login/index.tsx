@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -11,9 +11,10 @@ import * as Yup from 'yup'
 import { getValidationErrors } from '../../utils'
 import { Button, Input } from '../../components/'
 import * as S from './styles'
-import { useAppDispatch } from '../../hooks'
+import { useAppDispatch, useAppSelector } from '../../hooks'
 import api from '../../services/api'
 import { setUser } from '../../state/slices/UserSlice'
+import { useRouter } from 'next/dist/client/router'
 
 type IFormData = {
   email: string
@@ -23,6 +24,24 @@ type IFormData = {
 const Login: NextPage = () => {
   const formRef = useRef<FormHandles>(null)
   const dispatch = useAppDispatch()
+  const user = useAppSelector(state => state.user)
+  const router = useRouter()
+
+  useEffect(() => {
+    const redirectUser = async () => {
+      if (!user) {
+        try {
+          const { data } = await api.get('/refresh-token')
+          dispatch(setUser(data))
+        } catch {}
+        return
+      }
+
+      router.push('/')
+    }
+
+    redirectUser()
+  }, [user, dispatch, router])
 
   const handleLogin: SubmitHandler<IFormData> = async formData => {
     try {
