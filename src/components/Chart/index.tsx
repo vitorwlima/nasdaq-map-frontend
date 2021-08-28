@@ -7,50 +7,20 @@ import { CustomTooltip } from './CustomTooltip'
 import * as S from './styles'
 import StarIcon from '../../assets/star.svg'
 import GraphDownIcon from '../../assets/graph-down.svg'
+import GraphUpIcon from '../../assets/graph-up.svg'
+import { useAppSelector } from '../../hooks'
 
 export const Chart = () => {
-  const data = [
-    {
-      time: '09:00',
-      price: 400,
-    },
-    {
-      time: '09:30',
-      price: 1000,
-    },
-    {
-      time: '10:00',
-      price: 408,
-    },
-    {
-      time: '10:30',
-      price: 860,
-    },
-    {
-      time: '11:00',
-      price: 694,
-    },
-    {
-      time: '11:30',
-      price: 512,
-    },
-    {
-      time: '12:00',
-      price: 424,
-    },
-    {
-      time: '12:30',
-      price: 440,
-    },
-    {
-      time: '13:30',
-      price: 740,
-    },
-    {
-      time: '13:30',
-      price: 401,
-    },
-  ]
+  const { intradayQuote, quote } = useAppSelector(state => state.quoteReducer)
+  const isProfitable = quote ? quote?.changePercent >= 0 : true
+
+  if (!intradayQuote.length || !quote) {
+    return (
+      <S.Container noData={true}>
+        <h4>Comece buscando por uma empresa para ver sua variação diária!</h4>
+      </S.Container>
+    )
+  }
 
   return (
     <S.Container>
@@ -58,20 +28,22 @@ export const Chart = () => {
         <S.AssetInfo>
           <Image src={StarIcon} width='30' height='30' alt='Estrela' />
           <div className='info'>
-            <h4>MSFT</h4>
-            <span>Microsoft</span>
+            <h4>{quote?.symbol}</h4>
+            <span>{quote?.companyName}</span>
           </div>
         </S.AssetInfo>
-        <S.AssetPrices>
+        <S.AssetPrices isProfitable={isProfitable}>
           <div className='top'>
-            <Image src={GraphDownIcon} width='20' height='20' alt='ícone gráfico' />
-            <h4>$265.42</h4>
+            <Image src={isProfitable ? GraphUpIcon : GraphDownIcon} width='20' height='20' alt='ícone gráfico' />
+            <h4>${quote?.latestPrice}</h4>
           </div>
-          <div className='bottom'>$-0.09 (-0.03%)</div>
+          <div className='bottom'>
+            ${quote?.change} ({quote?.changePercent}%)
+          </div>
         </S.AssetPrices>
       </S.Header>
       <ResponsiveContainer width='100%' aspect={1.96} maxHeight={360}>
-        <AreaChart data={data} margin={{ top: 16, right: 12, bottom: 0, left: 12 }}>
+        <AreaChart data={intradayQuote} margin={{ top: 16, right: 12, bottom: 0, left: 12 }}>
           <defs>
             <linearGradient id='gradient' x1='0' y1='0' x2='0' y2='1'>
               <stop offset='0%' stopColor={theme.color.primary} stopOpacity={0.3} />
@@ -80,12 +52,12 @@ export const Chart = () => {
           </defs>
 
           <Area
-            dataKey='price'
+            dataKey='close'
             stroke={theme.color.primary}
             fill='url(#gradient)'
             type='monotone'
             strokeWidth={2}
-            dot={{ fill: theme.color.primary, r: 4.5, fillOpacity: 1 }}
+            // dot={{ fill: theme.color.primary, r: 4.5, fillOpacity: 1 }}
             activeDot={{
               stroke: 'white',
               fill: theme.color.primary,
@@ -94,10 +66,10 @@ export const Chart = () => {
             }}
           />
 
-          <XAxis dataKey='time' tickLine={false} axisLine={false} tickMargin={10} />
+          <XAxis dataKey='minute' tickLine={false} axisLine={false} tickMargin={10} />
 
           <YAxis
-            dataKey='price'
+            dataKey='close'
             tickLine={false}
             tickCount={6}
             tickFormatter={value => `$${value.toFixed(0)}`}

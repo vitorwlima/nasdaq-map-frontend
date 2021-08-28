@@ -3,6 +3,7 @@ import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
+import { IQuote, IIntradayPrices } from '../../interfaces'
 import api from '../../services/api'
 import iexApi from '../../services/iexApi'
 import { setQuoteInfo } from '../../state/slices/QuoteSlice'
@@ -10,11 +11,12 @@ import { setUser } from '../../state/slices/UserSlice'
 import { HomeTemplate } from '../../templates'
 
 type DashboardProps = {
-  quote: any
-  intradayQuote: any
+  quote: IQuote
+  intradayQuote: IIntradayPrices
+  error: string
 }
 
-const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote }) => {
+const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) => {
   const user = useAppSelector(state => state.userReducer.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -33,8 +35,14 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote }) => {
       authenticateByRefresh()
     }
 
-    dispatch(setQuoteInfo({ quote, intradayQuote }))
-  }, [user, dispatch, router, quote, intradayQuote])
+    if (error) {
+      console.log(error)
+      router.push('/dashboard')
+      return
+    }
+
+    dispatch(setQuoteInfo({ quote, intradayQuote: intradayQuote.filter(item => item.close !== null) }))
+  }, [user, dispatch, router, quote, intradayQuote, error])
 
   return (
     <>

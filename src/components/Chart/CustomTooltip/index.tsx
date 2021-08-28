@@ -12,7 +12,7 @@ export const CustomTooltip = ({ active, payload }: ICustomTooltipProps) => {
     return null
   }
 
-  const { time, price } = payload[0].payload
+  const { close } = payload[0].payload
 
-  return <S.Container>${price}</S.Container>
+  return <S.Container>${close.toFixed(2)}</S.Container>
 }
