@@ -16,6 +16,7 @@ export default createGlobalStyle`
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-size: ${theme.font.size.medium};
+    color: ${theme.color.black};
   }
 
   h1, h2, h3 {
@@ -32,6 +33,10 @@ export default createGlobalStyle`
 
   h3 {
     font-size: ${theme.font.size.large};
+  }
+
+  h4 {
+    font-size: ${theme.font.size.xmedium};
   }
 
   * {

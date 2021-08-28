@@ -6,6 +6,7 @@ const theme = {
       xsmall: '1.2rem',
       small: '1.4rem',
       medium: '1.6rem',
+      xmedium: '1.8rem',
       large: '2.0rem',
       xlarge: '2.4rem',
       xxlarge: '3.6rem',
@@ -14,6 +15,7 @@ const theme = {
     weight: {
       light: 300,
       regular: 400,
+      smallBold: 600,
       bold: 700,
     },
   },
@@ -31,6 +33,7 @@ const theme = {
   },
 
   spacing: {
+    xxsmall: '0.4rem',
     xsmall: '0.8rem',
     small: '1.6rem',
     medium: '2.4rem',

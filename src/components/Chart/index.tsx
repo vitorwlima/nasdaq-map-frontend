@@ -1,9 +1,12 @@
 import React from 'react'
+import Image from 'next/image'
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+
 import theme from '../../styles/theme'
 import { CustomTooltip } from './CustomTooltip'
-
 import * as S from './styles'
+import StarIcon from '../../assets/star.svg'
+import GraphDownIcon from '../../assets/graph-down.svg'
 
 export const Chart = () => {
   const data = [
@@ -51,6 +54,22 @@ export const Chart = () => {
 
   return (
     <S.Container>
+      <S.Header>
+        <S.AssetInfo>
+          <Image src={StarIcon} width='30' height='30' alt='Estrela' />
+          <div className='info'>
+            <h4>MSFT</h4>
+            <span>Microsoft</span>
+          </div>
+        </S.AssetInfo>
+        <S.AssetPrices>
+          <div className='top'>
+            <Image src={GraphDownIcon} width='20' height='20' alt='ícone gráfico' />
+            <h4>$265.42</h4>
+          </div>
+          <div className='bottom'>$-0.09 (-0.03%)</div>
+        </S.AssetPrices>
+      </S.Header>
       <ResponsiveContainer width='100%' aspect={4}>
         <AreaChart data={data} margin={{ top: 16, right: 12, bottom: 0, left: 12 }}>
           <defs>
