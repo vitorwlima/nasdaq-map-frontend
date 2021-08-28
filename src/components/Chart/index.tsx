@@ -1,6 +1,7 @@
 import React from 'react'
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import theme from '../../styles/theme'
+import { CustomTooltip } from './CustomTooltip'
 
 import * as S from './styles'
 
@@ -50,24 +51,44 @@ export const Chart = () => {
 
   return (
     <S.Container>
-      <ResponsiveContainer width='100%' height={400}>
-        <AreaChart data={data}>
+      <ResponsiveContainer width='100%' aspect={4}>
+        <AreaChart data={data} margin={{ top: 16, right: 12, bottom: 0, left: 12 }}>
           <defs>
             <linearGradient id='gradient' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='0%' stopColor={theme.color.primary} stopOpacity={0.4} />
+              <stop offset='0%' stopColor={theme.color.primary} stopOpacity={0.3} />
               <stop offset='75%' stopColor={theme.color.primary} stopOpacity={0.05} />
             </linearGradient>
           </defs>
 
-          <Area dataKey='price' stroke={theme.color.primary} fill='url(#gradient)' />
+          <Area
+            dataKey='price'
+            stroke={theme.color.primary}
+            fill='url(#gradient)'
+            type='monotone'
+            strokeWidth={2}
+            dot={{ fill: theme.color.primary, r: 4.5, fillOpacity: 1 }}
+            activeDot={{
+              stroke: 'white',
+              fill: theme.color.primary,
+              r: 10,
+              strokeWidth: 4,
+            }}
+          />
 
-          <XAxis dataKey='time' tickLine={false} />
+          <XAxis dataKey='time' tickLine={false} axisLine={false} tickMargin={10} />
 
-          <YAxis dataKey='price' tickLine={false} tickCount={6} tickFormatter={value => `$${value.toFixed(0)}`} />
+          <YAxis
+            dataKey='price'
+            tickLine={false}
+            tickCount={6}
+            tickFormatter={value => `$${value.toFixed(0)}`}
+            axisLine={false}
+            tickMargin={10}
+          />
 
           <CartesianGrid stroke={theme.color.gray} opacity={0.1} />
 
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} cursor={false} viewBox={{ y: -10 }} />
         </AreaChart>
       </ResponsiveContainer>
     </S.Container>
