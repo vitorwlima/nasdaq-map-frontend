@@ -6,6 +6,12 @@ export const Container = styled.section`
   flex: 1;
   border-top-left-radius: 40px;
   padding: ${theme.spacing.large} ${theme.spacing.medium};
+
+  form {
+    margin-top: ${theme.spacing.small};
+    margin-bottom: ${theme.spacing.medium};
+    max-width: 360px;
+  }
 `
 
 export const Title = styled.div`
