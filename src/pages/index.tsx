@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import api from '../services/api'
 import { setUser } from '../state/slices/UserSlice'
+import { HomeTemplate } from '../templates'
 
 const Home: NextPage = () => {
   const user = useAppSelector(state => state.user)
@@ -27,13 +28,13 @@ const Home: NextPage = () => {
   }, [user, dispatch, router])
 
   return (
-    <div>
+    <>
       <Head>
         <title>Nasdaq Map | Dashboard</title>
         <meta name='description' content='Dashboard aplicação Nasdaq Map' />
       </Head>
-      {user ? <div>Página home meu nome é {user.name}</div> : <div>carregando...</div>}
-    </div>
+      {user ? <HomeTemplate /> : <div>carregando...</div>}
+    </>
   )
 }
 
