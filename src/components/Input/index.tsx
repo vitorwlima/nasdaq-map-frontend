@@ -1,13 +1,15 @@
 import { useField } from '@unform/core'
+import Image from 'next/image'
 import { useState, useEffect, useCallback, useRef, InputHTMLAttributes } from 'react'
 
 import * as S from './styles'
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string
+  icon?: any
 }
 
-export const Input = ({ name, placeholder, ...rest }: InputProps) => {
+export const Input = ({ name, placeholder, icon, ...rest }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const [isFocused, setIsFocused] = useState(false)
@@ -40,6 +42,12 @@ export const Input = ({ name, placeholder, ...rest }: InputProps) => {
       <S.Label>{placeholder}</S.Label>
 
       {error && <S.Error>{error}</S.Error>}
+
+      {icon && (
+        <S.IconWrapper type='submit'>
+          <Image src={icon} width='35' height='35' alt='ícone' />
+        </S.IconWrapper>
+      )}
     </S.Container>
   )
 }

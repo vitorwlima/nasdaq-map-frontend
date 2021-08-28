@@ -11,6 +11,8 @@ export const Container = styled.div`
   align-items: center;
   max-width: 120px;
   padding: ${theme.spacing.medium} 0;
+  height: 100vh;
+  flex: 1;
 `
 
 export const NavigationItems = styled.nav`

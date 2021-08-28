@@ -11,7 +11,7 @@ export const Container = styled.div<ContainerProps>`
   ${({ isFocused, isErrored }) => css`
     position: relative;
     width: 100%;
-    border: 1px solid ${theme.color.gray};
+    border: 1px solid #e1e0e7;
     border-radius: 8px;
     background: ${theme.color.white};
     transition: border-color margin 0.3s;
@@ -20,7 +20,7 @@ export const Container = styled.div<ContainerProps>`
       margin-top: ${isErrored ? '24px' : '16px'};
     }
 
-    border-color: ${isFocused && theme.color.black};
+    border-color: ${isFocused && theme.color.gray};
     border-color: ${isErrored && theme.color.danger};
   `}
 `
@@ -66,4 +66,18 @@ export const Error = styled.span`
   top: calc(100% + (${theme.spacing.xsmall} / 2));
   font-size: ${theme.font.size.xsmall};
   left: 0;
+`
+
+export const IconWrapper = styled.button`
+  position: absolute;
+  width: 49px;
+  height: 49px;
+  right: -1px;
+  top: 0;
+  background-color: ${theme.color.primary};
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
 `
