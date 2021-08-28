@@ -70,7 +70,7 @@ export const Chart = () => {
           <div className='bottom'>$-0.09 (-0.03%)</div>
         </S.AssetPrices>
       </S.Header>
-      <ResponsiveContainer width='100%' aspect={4}>
+      <ResponsiveContainer width='100%' aspect={1.96} maxHeight={360}>
         <AreaChart data={data} margin={{ top: 16, right: 12, bottom: 0, left: 12 }}>
           <defs>
             <linearGradient id='gradient' x1='0' y1='0' x2='0' y2='1'>

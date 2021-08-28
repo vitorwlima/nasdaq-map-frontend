@@ -13,7 +13,7 @@ export const Dashboard = () => {
     <S.Container>
       <S.Title>
         <Image src={DashboardIcon} width='30' height='30' alt='Dashboard' />
-        <h3>Dashboard</h3>
+        <h2>Dashboard</h2>
       </S.Title>
       <Form onSubmit={() => console.log('oi')}>
         <Input name='company' placeholder='Buscar empresa' icon={SearchIcon} />

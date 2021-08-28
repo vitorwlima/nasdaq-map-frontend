@@ -18,7 +18,7 @@ export const Title = styled.div`
   display: flex;
   align-items: center;
 
-  h3 {
+  h2 {
     margin-left: ${theme.spacing.small};
   }
 `
