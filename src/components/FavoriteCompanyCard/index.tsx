@@ -5,6 +5,7 @@ import { useRouter } from 'next/dist/client/router'
 import * as S from './styles'
 import TwitterLogo from '../../assets/companies/twitter.svg'
 import GraphUp from '../../assets/graph-up.svg'
+import GraphDown from '../../assets/graph-down.svg'
 import TrashIcon from '../../assets/trash.svg'
 import api from '../../services/api'
 import { useAppDispatch } from '../../hooks'
@@ -44,10 +45,10 @@ export const FavoriteCompanyCard = ({ symbol, name, profit, logo }: IFavoriteCom
         </div>
         <div className='prices'>
           <span>
-            {isProfitable ? '+' : '-'}
+            {isProfitable && '+'}
             {profit.toFixed(2)}
           </span>
-          <Image src={GraphUp} width='16' height='16' alt='gráfico' />
+          <Image src={isProfitable ? GraphUp : GraphDown} width='16' height='16' alt='gráfico' />
         </div>
       </S.Content>
       <div className='trash' onClick={handleRemoveFavorite}>

@@ -38,8 +38,8 @@ export const Chart = () => {
             <h4>${quote.latestPrice}</h4>
           </div>
           <div className='bottom'>
-            ${isProfitable ? '+' : '-'}
-            {quote.change} ({isProfitable ? '+' : '-'}
+            ${isProfitable && '+'}
+            {quote.change} ({isProfitable && '+'}
             {quote?.changePercent}%)
           </div>
         </S.AssetPrices>
