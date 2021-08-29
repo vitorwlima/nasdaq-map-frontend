@@ -59,7 +59,6 @@ export const Chart = () => {
             fill='url(#gradient)'
             type='monotone'
             strokeWidth={2}
-            // dot={{ fill: theme.color.primary, r: 4.5, fillOpacity: 1 }}
             activeDot={{
               stroke: 'white',
               fill: theme.color.primary,
@@ -68,7 +67,22 @@ export const Chart = () => {
             }}
           />
 
-          <XAxis dataKey='minute' tickLine={false} axisLine={false} tickMargin={10} />
+          <XAxis
+            dataKey='minute'
+            tickLine={false}
+            axisLine={false}
+            tickMargin={10}
+            interval={0}
+            tickFormatter={value => {
+              const isDivisibleByHalfHour = +value.split(':')[1] % 30 === 0
+              console.log(isDivisibleByHalfHour, value)
+              if (isDivisibleByHalfHour) {
+                return value
+              }
+
+              return ''
+            }}
+          />
 
           <YAxis
             dataKey='close'
