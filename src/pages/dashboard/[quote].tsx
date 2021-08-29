@@ -51,7 +51,7 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
   }, [error, dispatch, quote, intradayQuote, router])
 
   useEffect(() => {
-    if (user && !hasUpdated.current) {
+    if (user && !hasUpdated.current && !error) {
       const registerRecentCompany = async () => {
         const { data } = await api.post('/recent-company', { quote: quote.symbol })
         if (data) {
@@ -62,7 +62,7 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
 
       registerRecentCompany()
     }
-  }, [dispatch, quote.symbol, user, hasUpdated])
+  }, [dispatch, quote, user, hasUpdated, error])
 
   return (
     <>
