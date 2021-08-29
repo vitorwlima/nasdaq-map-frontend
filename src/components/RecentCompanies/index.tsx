@@ -16,8 +16,6 @@ export const RecentCompanies = () => {
   const [recentCompanies, setRecentCompanies] = useState<IQuote[]>([])
 
   useEffect(() => {
-    setRecentCompanies([])
-
     const getCompanies = async () => {
       const companies: IQuote[] = []
       for (let i = 0; companies.length < user.recentCompanies.length; i++) {
@@ -27,6 +25,7 @@ export const RecentCompanies = () => {
         companies.push(data)
       }
 
+      setRecentCompanies([])
       setRecentCompanies(companies)
     }
 

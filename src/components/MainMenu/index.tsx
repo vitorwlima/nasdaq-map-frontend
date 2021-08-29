@@ -20,8 +20,6 @@ export const MainMenu = () => {
   const [favoriteCompanies, setFavoriteCompanies] = useState<IQuote[]>([])
 
   useEffect(() => {
-    setFavoriteCompanies([])
-
     const getCompanies = async () => {
       const companies: IQuote[] = []
       for (let i = 0; companies.length < user.favoriteCompanies.length; i++) {
@@ -31,6 +29,7 @@ export const MainMenu = () => {
         companies.push(data)
       }
 
+      setFavoriteCompanies([])
       setFavoriteCompanies(companies)
     }
 
