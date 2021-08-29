@@ -7,6 +7,7 @@ import DashboardIcon from '../../assets/dashboard.svg'
 import SearchIcon from '../../assets/search.svg'
 import { Chart, Input, RecentCompanies } from '../'
 import { useRouter } from 'next/dist/client/router'
+import { SubmitHandler } from '@unform/core'
 
 type IFormData = {
   company: string
@@ -15,7 +16,8 @@ type IFormData = {
 export const Dashboard = () => {
   const router = useRouter()
 
-  const handleRedirectCompany = ({ company }: IFormData) => {
+  const handleRedirectCompany: SubmitHandler<IFormData> = ({ company }, { reset }) => {
+    setTimeout(reset, 1000)
     return router.push(`/dashboard/${company}`)
   }
 
