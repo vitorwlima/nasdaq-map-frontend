@@ -2,6 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import { useEffect, useRef } from 'react'
+import { ErrorToast } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IQuote, IIntradayPrices } from '../../interfaces'
 import api from '../../services/api'
@@ -27,7 +28,6 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
       const authenticateByRefresh = async () => {
         try {
           const { data } = await api.get('/refresh-token')
-          console.log(data)
           api.defaults.headers['Authorization'] = `Bearer ${data.token}`
           dispatch(setUser(data))
         } catch {
@@ -41,7 +41,7 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
 
   useEffect(() => {
     if (error) {
-      console.log(error)
+      ErrorToast({ errorMessage: error })
       router.push('/dashboard')
       return
     }
