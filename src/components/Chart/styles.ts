@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { deviceMaxWidth } from '../../styles/devices'
 import theme from '../../styles/theme'
 
 type ContainerProps = {
@@ -44,6 +45,10 @@ export const AssetInfo = styled.div`
 
     span {
       color: ${theme.color.gray};
+
+      @media ${deviceMaxWidth.mobileL} {
+        font-size: ${theme.font.size.xsmall};
+      }
     }
   }
 `
@@ -66,5 +71,9 @@ export const AssetPrices = styled.div<AssetPricesProps>`
   .bottom {
     font-weight: ${theme.font.weight.smallBold};
     color: ${props => (props.isProfitable ? theme.color.success : theme.color.danger)};
+
+    @media ${deviceMaxWidth.mobileL} {
+      font-size: ${theme.font.size.xsmall};
+    }
   }
 `
