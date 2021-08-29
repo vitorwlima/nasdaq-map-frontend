@@ -7,6 +7,7 @@ import FilledStarIcon from '../../assets/filled-star.svg'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import api from '../../services/api'
 import { setUser } from '../../state/slices/UserSlice'
+import { Tooltip } from '../Tooltip'
 
 type IFavoriteButtonProps = {
   quote: string
@@ -37,13 +38,15 @@ export const FavoriteButton = ({ quote }: IFavoriteButtonProps) => {
   )
 
   return (
-    <S.Container onClick={handleClick}>
-      <Image
-        src={isFavorite ? FilledStarIcon : StarIcon}
-        width='30'
-        height='30'
-        alt={isFavorite ? 'estrela preenchida' : 'estrela vazia'}
-      />
-    </S.Container>
+    <Tooltip text={isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}>
+      <S.Container onClick={handleClick}>
+        <Image
+          src={isFavorite ? FilledStarIcon : StarIcon}
+          width='30'
+          height='30'
+          alt={isFavorite ? 'estrela preenchida' : 'estrela vazia'}
+        />
+      </S.Container>
+    </Tooltip>
   )
 }
