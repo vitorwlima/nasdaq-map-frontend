@@ -14,9 +14,10 @@ type IFavoriteCompanyCardProps = {
   symbol: string
   name: string
   profit: number
+  logo: string
 }
 
-export const FavoriteCompanyCard = ({ symbol, name, profit }: IFavoriteCompanyCardProps) => {
+export const FavoriteCompanyCard = ({ symbol, name, profit, logo }: IFavoriteCompanyCardProps) => {
   const isProfitable = profit >= 0
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -30,13 +31,13 @@ export const FavoriteCompanyCard = ({ symbol, name, profit }: IFavoriteCompanyCa
   }, [dispatch, symbol])
 
   const handleRedirect = useCallback(() => {
-    router.push(`/dashboard/${symbol}`, undefined)
+    router.push(`/dashboard/${symbol}`)
   }, [symbol, router])
 
   return (
     <S.Container>
       <S.Content isProfitable={isProfitable} onClick={handleRedirect}>
-        <Image src={TwitterLogo} width='40' height='40' alt='twitter' />
+        <Image src={logo} width='40' height='40' alt='twitter' />
         <div className='info'>
           <h5>{symbol}</h5>
           <span>{name}</span>

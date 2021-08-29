@@ -12,21 +12,28 @@ import { setOpenMenu } from '../../state/slices/MenuSlice'
 import { IQuote } from '../../interfaces'
 import iexApi from '../../services/iexApi'
 
+type ICompany = IQuote & {
+  logo: string
+}
+
 export const MainMenu = () => {
   const isMenuOpen = useAppSelector(state => state.menuReducer.open)
   const user = useAppSelector(state => state.userReducer.user)!
   const dispatch = useAppDispatch()
 
-  const [favoriteCompanies, setFavoriteCompanies] = useState<IQuote[]>([])
+  const [favoriteCompanies, setFavoriteCompanies] = useState<ICompany[]>([])
 
   useEffect(() => {
     const getCompanies = async () => {
-      const companies: IQuote[] = []
+      const companies: ICompany[] = []
       for (let i = 0; companies.length < user.favoriteCompanies.length; i++) {
         const { data } = await iexApi.get<IQuote>(
           `/stable/stock/${user.favoriteCompanies[i]}/quote?token=${process.env.NEXT_PUBLIC_API_KEY}`
         )
-        companies.push(data)
+        const response = await iexApi.get(
+          `/stable/stock/${user.favoriteCompanies[i]}/logo?token=${process.env.NEXT_PUBLIC_API_KEY}`
+        )
+        companies.push({ ...data, logo: response.data.url })
       }
 
       setFavoriteCompanies([])
@@ -82,6 +89,7 @@ export const MainMenu = () => {
               symbol={company.symbol}
               name={company.companyName}
               profit={company.changePercent}
+              logo={company.logo}
             />
           ))
         ) : (

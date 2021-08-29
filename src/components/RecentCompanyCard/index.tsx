@@ -1,9 +1,8 @@
-import React, { useCallback } from 'react'
+import React, { useEffect, useCallback, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/dist/client/router'
 
 import * as S from './styles'
-import TwitterLogo from '../../assets/companies/twitter.svg'
 import GraphUp from '../../assets/graph-up.svg'
 import GraphDown from '../../assets/graph-down.svg'
 import { FavoriteButton } from '../FavoriteButton'
@@ -12,9 +11,10 @@ type IRecentCompanyCardProps = {
   symbol: string
   name: string
   profit: number
+  logo: string
 }
 
-export const RecentCompanyCard = ({ symbol, name, profit }: IRecentCompanyCardProps) => {
+export const RecentCompanyCard = ({ symbol, name, profit, logo }: IRecentCompanyCardProps) => {
   const isProfitable = profit >= 0
   const router = useRouter()
 
@@ -25,7 +25,7 @@ export const RecentCompanyCard = ({ symbol, name, profit }: IRecentCompanyCardPr
   return (
     <S.Container isProfitable={isProfitable} onClick={handleRedirect}>
       <FavoriteButton quote={symbol} />
-      <Image src={TwitterLogo} width='40' height='40' alt={name} />
+      <Image src={logo} width='40' height='40' alt={name} />
       <div className='info'>
         <h5>{symbol}</h5>
         <span>{name}</span>

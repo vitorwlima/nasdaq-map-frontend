@@ -9,20 +9,27 @@ import { useAppSelector } from '../../hooks'
 import iexApi from '../../services/iexApi'
 import { IQuote } from '../../interfaces'
 
+type ICompany = IQuote & {
+  logo: string
+}
+
 export const RecentCompanies = () => {
   const [currentCompany, setCurrentCompany] = useState(0)
   const [maxCardsOnScreen, setMaxCardsOnScreen] = useState(2)
   const user = useAppSelector(state => state.userReducer.user)!
-  const [recentCompanies, setRecentCompanies] = useState<IQuote[]>([])
+  const [recentCompanies, setRecentCompanies] = useState<ICompany[]>([])
 
   useEffect(() => {
     const getCompanies = async () => {
-      const companies: IQuote[] = []
+      const companies: ICompany[] = []
       for (let i = 0; companies.length < user.recentCompanies.length; i++) {
         const { data } = await iexApi.get<IQuote>(
           `/stable/stock/${user.recentCompanies[i]}/quote?token=${process.env.NEXT_PUBLIC_API_KEY}`
         )
-        companies.push(data)
+        const response = await iexApi.get(
+          `/stable/stock/${user.recentCompanies[i]}/logo?token=${process.env.NEXT_PUBLIC_API_KEY}`
+        )
+        companies.push({ ...data, logo: response.data.url })
       }
 
       setRecentCompanies([])
@@ -96,6 +103,7 @@ export const RecentCompanies = () => {
               symbol={company.symbol}
               name={company.companyName}
               profit={company.changePercent}
+              logo={company.logo}
             />
           ))
         ) : (
