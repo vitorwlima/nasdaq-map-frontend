@@ -23,6 +23,7 @@ export const Content = styled.div<ContentProps>`
   border-radius: ${theme.radius.medium};
   flex: 1;
   margin-right: ${theme.spacing.xsmall};
+  cursor: pointer;
 
   .info {
     flex: 1;

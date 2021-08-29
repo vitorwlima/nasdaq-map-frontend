@@ -13,6 +13,7 @@ export const Container = styled.div<ContainerProps>`
   box-shadow: 0 8px 20px rgba(43, 37, 63, 0.1);
   border-radius: ${theme.radius.medium};
   background-color: ${theme.color.white};
+  cursor: pointer;
 
   button {
     margin-right: ${theme.spacing.xsmall};

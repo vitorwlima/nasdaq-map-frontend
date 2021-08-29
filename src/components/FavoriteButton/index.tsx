@@ -18,19 +18,23 @@ export const FavoriteButton = ({ quote }: IFavoriteButtonProps) => {
 
   const isFavorite = user.favoriteCompanies.includes(quote)
 
-  const handleClick = useCallback(async () => {
-    if (isFavorite) {
-      const { data } = await api.delete(`/favorite-company/${quote}`)
-      if (data) {
-        return dispatch(setUser(data))
+  const handleClick = useCallback(
+    async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.stopPropagation()
+      if (isFavorite) {
+        const { data } = await api.delete(`/favorite-company/${quote}`)
+        if (data) {
+          return dispatch(setUser(data))
+        }
       }
-    }
 
-    const { data } = await api.post('/favorite-company', { quote })
-    if (data) {
-      dispatch(setUser(data))
-    }
-  }, [dispatch, isFavorite, quote])
+      const { data } = await api.post('/favorite-company', { quote })
+      if (data) {
+        dispatch(setUser(data))
+      }
+    },
+    [dispatch, isFavorite, quote]
+  )
 
   return (
     <S.Container onClick={handleClick}>

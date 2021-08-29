@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/dist/client/router'
 
 import * as S from './styles'
 import TwitterLogo from '../../assets/companies/twitter.svg'
@@ -18,6 +19,7 @@ type IFavoriteCompanyCardProps = {
 export const FavoriteCompanyCard = ({ symbol, name, profit }: IFavoriteCompanyCardProps) => {
   const isProfitable = profit >= 0
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
   const handleRemoveFavorite = useCallback(async () => {
     const { data } = await api.delete(`/favorite-company/${symbol}`)
@@ -27,9 +29,13 @@ export const FavoriteCompanyCard = ({ symbol, name, profit }: IFavoriteCompanyCa
     }
   }, [dispatch, symbol])
 
+  const handleRedirect = useCallback(() => {
+    router.push(`/dashboard/${symbol}`, undefined)
+  }, [symbol, router])
+
   return (
     <S.Container>
-      <S.Content isProfitable={isProfitable}>
+      <S.Content isProfitable={isProfitable} onClick={handleRedirect}>
         <Image src={TwitterLogo} width='40' height='40' alt='twitter' />
         <div className='info'>
           <h5>{symbol}</h5>
