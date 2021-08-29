@@ -25,6 +25,7 @@ const theme = {
     darkPrimary: shade(0.2, '#0047BB'),
     opaquePrimary: transparentize(0.5, '#0047BB'),
     secondary: '#F06400',
+    darkSecondary: shade(0.2, '#F06400'),
     black: '#14171A',
     gray: '#657786',
     lightGray: '#F5F8FA',

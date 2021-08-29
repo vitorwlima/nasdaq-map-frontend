@@ -13,6 +13,23 @@ type NavigationItemProps = {
 export const Container = styled.div<ContainerProps>`
   width: 400px;
   padding: ${theme.spacing.medium} ${theme.spacing.small};
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${theme.color.white};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${theme.color.secondary};
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${theme.color.darkSecondary};
+  }
 
   header {
     display: none;
