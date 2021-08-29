@@ -4,7 +4,7 @@ import * as S from './styles'
 import TwitterLogo from '../../assets/companies/twitter.svg'
 import GraphUp from '../../assets/graph-up.svg'
 import GraphDown from '../../assets/graph-down.svg'
-import StarIcon from '../../assets/star.svg'
+import { FavoriteButton } from '../FavoriteButton'
 
 type IRecentCompanyCardProps = {
   symbol: string
@@ -14,9 +14,10 @@ type IRecentCompanyCardProps = {
 
 export const RecentCompanyCard = ({ symbol, name, profit }: IRecentCompanyCardProps) => {
   const isProfitable = profit >= 0
+
   return (
     <S.Container isProfitable={isProfitable}>
-      <Image src={StarIcon} width='30' height='30' alt='Estrela' />
+      <FavoriteButton quote={symbol} />
       <Image src={TwitterLogo} width='40' height='40' alt={name} />
       <div className='info'>
         <h5>{symbol}</h5>

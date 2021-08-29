@@ -14,6 +14,10 @@ export const Container = styled.div<ContainerProps>`
   border-radius: ${theme.radius.medium};
   background-color: ${theme.color.white};
 
+  button {
+    margin-right: ${theme.spacing.xsmall};
+  }
+
   .info {
     flex: 1;
     display: flex;
