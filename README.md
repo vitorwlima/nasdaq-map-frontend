@@ -4,6 +4,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Como acessar
 Acesse a versão hospedada no vercel por aqui: https://nasdaq-map.vercel.app/
 
+## Preview
+
+https://user-images.githubusercontent.com/82615423/131267670-a97512e0-e81c-47c7-a2bf-d011d778c424.mp4
+
+
 ## Sobre o projeto
 Nasdaq Map é uma aplicação feita para verificar e acompanhar ações da bolsa Nasdaq. Feito em NextJS, as informações de cada ação são pegas pelo lado do servidor (SSR) para disponibilizar as informações ao usuário. Para estilização, componentes reutilizáveis feitos com styled-components, seguindo o padrão estabelecido pelo "tema", que contém tamanhos de fonte e espaçamento determinados. Por fim, temos o gerenciamento de estado feito com redux (redux-toolkit, nesse caso), o qual guarda as informações do usuário autenticado e da ação que está sendo mostrada em tela no momento.
 
