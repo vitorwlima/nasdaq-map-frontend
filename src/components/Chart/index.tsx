@@ -72,15 +72,19 @@ export const Chart = () => {
             tickLine={false}
             axisLine={false}
             tickMargin={10}
-            interval={0}
-            tickFormatter={value => {
-              const isDivisibleByHalfHour = +value.split(':')[1] % 30 === 0
-              if (isDivisibleByHalfHour) {
-                return value
-              }
+            interval={window.innerWidth > 1024 ? 0 : 100}
+            tickFormatter={
+              window.innerWidth > 1024
+                ? value => {
+                    const isDivisibleByHalfHour = +value.split(':')[1] % 30 === 0
+                    if (isDivisibleByHalfHour) {
+                      return value
+                    }
 
-              return ''
-            }}
+                    return ''
+                  }
+                : value => value
+            }
           />
 
           <YAxis
