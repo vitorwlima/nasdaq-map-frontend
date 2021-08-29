@@ -58,7 +58,7 @@ const Register: NextPage = () => {
 
       const { data } = await api.post('/register', { name, email, password })
       dispatch(setUser(data))
-    } catch (err) {
+    } catch (err: any) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err)
         formRef.current?.setErrors(errors)

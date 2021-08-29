@@ -56,7 +56,7 @@ const Login: NextPage = () => {
 
       const { data } = await api.post('/login', { email: formData.email, password: formData.password })
       dispatch(setUser(data))
-    } catch (err) {
+    } catch (err: any) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err)
         formRef.current?.setErrors(errors)
