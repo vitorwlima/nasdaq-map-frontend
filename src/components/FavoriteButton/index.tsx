@@ -21,11 +21,15 @@ export const FavoriteButton = ({ quote }: IFavoriteButtonProps) => {
   const handleClick = useCallback(async () => {
     if (isFavorite) {
       const { data } = await api.delete(`/favorite-company/${quote}`)
-      return dispatch(setUser(data))
+      if (data) {
+        return dispatch(setUser(data))
+      }
     }
 
     const { data } = await api.post('/favorite-company', { quote })
-    dispatch(setUser(data))
+    if (data) {
+      dispatch(setUser(data))
+    }
   }, [dispatch, isFavorite, quote])
 
   return (

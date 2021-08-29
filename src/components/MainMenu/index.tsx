@@ -1,19 +1,41 @@
+import React, { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
-import React from 'react'
+import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
-import { FavoriteCompanyCard } from '../FavoriteCompanyCard'
-import { UserCard } from '../UserCard'
+
 import * as S from './styles'
+import { FavoriteCompanyCard, UserCard } from '../'
 import FilledStar from '../../assets/filled-star.svg'
 import HomeIcon from '../../assets/home.svg'
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { useCallback } from 'react'
 import { setOpenMenu } from '../../state/slices/MenuSlice'
-import Link from 'next/link'
+import { IQuote } from '../../interfaces'
+import iexApi from '../../services/iexApi'
 
 export const MainMenu = () => {
   const isMenuOpen = useAppSelector(state => state.menuReducer.open)
+  const user = useAppSelector(state => state.userReducer.user)!
   const dispatch = useAppDispatch()
+
+  const [favoriteCompanies, setFavoriteCompanies] = useState<IQuote[]>([])
+
+  useEffect(() => {
+    setFavoriteCompanies([])
+
+    const getCompanies = async () => {
+      const companies: IQuote[] = []
+      for (let i = 0; companies.length < user.favoriteCompanies.length; i++) {
+        const { data } = await iexApi.get<IQuote>(
+          `/stable/stock/${user.favoriteCompanies[i]}/quote?token=${process.env.NEXT_PUBLIC_API_KEY}`
+        )
+        companies.push(data)
+      }
+
+      setFavoriteCompanies(companies)
+    }
+
+    getCompanies()
+  }, [user.favoriteCompanies])
 
   const navigationItems = [
     {
@@ -54,8 +76,13 @@ export const MainMenu = () => {
           <Image src={FilledStar} width='24' height='24' alt='estrela' />
           <h4>Empresas favoritas</h4>
         </div>
-        {[1, 2, 3].map(item => (
-          <FavoriteCompanyCard key={item} />
+        {favoriteCompanies.map(company => (
+          <FavoriteCompanyCard
+            key={company.symbol}
+            symbol={company.symbol}
+            name={company.companyName}
+            profit={company.changePercent}
+          />
         ))}
       </S.FavoriteCompanies>
     </S.Container>

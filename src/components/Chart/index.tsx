@@ -5,10 +5,10 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import theme from '../../styles/theme'
 import { CustomTooltip } from './CustomTooltip'
 import * as S from './styles'
-import StarIcon from '../../assets/star.svg'
 import GraphDownIcon from '../../assets/graph-down.svg'
 import GraphUpIcon from '../../assets/graph-up.svg'
 import { useAppSelector } from '../../hooks'
+import { FavoriteButton } from '../FavoriteButton'
 
 export const Chart = () => {
   const { intradayQuote, quote } = useAppSelector(state => state.quoteReducer)
@@ -26,7 +26,7 @@ export const Chart = () => {
     <S.Container>
       <S.Header>
         <S.AssetInfo>
-          <Image src={StarIcon} width='30' height='30' alt='Estrela' />
+          <FavoriteButton quote={quote.symbol} />
           <div className='info'>
             <h4>{quote?.symbol}</h4>
             <span>{quote?.companyName}</span>

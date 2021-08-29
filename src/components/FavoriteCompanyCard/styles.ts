@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
+type ContentProps = {
+  isProfitable: boolean
+}
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -10,7 +14,7 @@ export const Container = styled.div`
   }
 `
 
-export const Content = styled.div`
+export const Content = styled.div<ContentProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -34,7 +38,7 @@ export const Content = styled.div`
   .prices {
     span {
       margin-right: ${theme.spacing.xxsmall};
-      color: ${theme.color.success};
+      color: ${props => (props.isProfitable ? theme.color.success : theme.color.danger)};
       font-weight: ${theme.font.weight.smallBold};
     }
   }
