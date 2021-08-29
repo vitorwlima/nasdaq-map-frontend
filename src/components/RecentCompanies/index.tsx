@@ -1,15 +1,37 @@
-import React, { useState } from 'react'
-import { RecentCompanyCard } from '../'
-import * as S from './styles'
-import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
-import StatsIcon from '../../assets/stats.svg'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { useEffect } from 'react'
+import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
+
+import * as S from './styles'
+import { RecentCompanyCard } from '../'
+import StatsIcon from '../../assets/stats.svg'
+import { useAppSelector } from '../../hooks'
+import iexApi from '../../services/iexApi'
+import { IQuote } from '../../interfaces'
 
 export const RecentCompanies = () => {
   const [currentCompany, setCurrentCompany] = useState(0)
   const [maxCardsOnScreen, setMaxCardsOnScreen] = useState(2)
-  const data = [1, 2, 3, 4, 5, 6, 7]
+  const user = useAppSelector(state => state.userReducer.user)!
+  const [recentCompanies, setRecentCompanies] = useState<IQuote[]>([])
+
+  useEffect(() => {
+    setRecentCompanies([])
+
+    const getCompanies = async () => {
+      const companies: IQuote[] = []
+      for (let i = 0; companies.length < user.recentCompanies.length; i++) {
+        const { data } = await iexApi.get<IQuote>(
+          `/stable/stock/${user.recentCompanies[i]}/quote?token=${process.env.NEXT_PUBLIC_API_KEY}`
+        )
+        companies.push(data)
+      }
+
+      setRecentCompanies(companies)
+    }
+
+    getCompanies()
+  }, [user.recentCompanies])
 
   useEffect(() => {
     const onResize = () => {
@@ -48,7 +70,7 @@ export const RecentCompanies = () => {
   }
 
   const handleNextCompany = () => {
-    if (currentCompany === data.length - maxCardsOnScreen) {
+    if (currentCompany === user.recentCompanies.length - maxCardsOnScreen) {
       return
     }
 
@@ -68,8 +90,13 @@ export const RecentCompanies = () => {
         </div>
       </S.Header>
       <S.Carousel currentCompany={currentCompany}>
-        {data.map(company => (
-          <RecentCompanyCard key={company} />
+        {recentCompanies.map(company => (
+          <RecentCompanyCard
+            key={company.symbol}
+            symbol={company.symbol}
+            name={company.companyName}
+            profit={company.changePercent}
+          />
         ))}
       </S.Carousel>
     </S.Container>

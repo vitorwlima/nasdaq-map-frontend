@@ -1,8 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IQuote, IIntradayPrices } from '../../interfaces'
 import api from '../../services/api'
@@ -21,7 +20,7 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
   const user = useAppSelector(state => state.userReducer.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const [hasUpdated, setHasUpdated] = useState(false)
+  const hasUpdated = useRef<boolean>(false)
 
   useEffect(() => {
     if (!user) {
@@ -47,18 +46,18 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
       return
     }
 
-    setHasUpdated(false)
+    hasUpdated.current = false
     dispatch(setQuoteInfo({ quote, intradayQuote: intradayQuote.filter(item => item.close !== null) }))
   }, [error, dispatch, quote, intradayQuote, router])
 
   useEffect(() => {
-    if (user && !hasUpdated) {
+    if (user && !hasUpdated.current) {
       const registerRecentCompany = async () => {
-        try {
-          const { data } = await api.post('/recent-company', { quote: quote.symbol })
+        const { data } = await api.post('/recent-company', { quote: quote.symbol })
+        if (data) {
           dispatch(setUser(data))
-          setHasUpdated(true)
-        } catch {}
+          hasUpdated.current = true
+        }
       }
 
       registerRecentCompany()
