@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { useCallback } from 'react'
 import api from '../../services/api'
 import { setUser } from '../../state/slices/UserSlice'
+import { setQuoteInfo } from '../../state/slices/QuoteSlice'
 
 export const UserCard = () => {
   const user = useAppSelector(state => state.userReducer.user)!
@@ -22,6 +23,7 @@ export const UserCard = () => {
   const handleLogout = useCallback(async () => {
     await api.get('/logout')
     dispatch(setUser({ user: null }))
+    dispatch(setQuoteInfo({ quote: null, intradayQuote: [] }))
   }, [dispatch])
 
   return (

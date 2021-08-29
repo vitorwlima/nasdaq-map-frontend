@@ -89,14 +89,18 @@ export const RecentCompanies = () => {
         </div>
       </S.Header>
       <S.Carousel currentCompany={currentCompany}>
-        {recentCompanies.map(company => (
-          <RecentCompanyCard
-            key={company.symbol}
-            symbol={company.symbol}
-            name={company.companyName}
-            profit={company.changePercent}
-          />
-        ))}
+        {recentCompanies.length ? (
+          recentCompanies.map(company => (
+            <RecentCompanyCard
+              key={company.symbol}
+              symbol={company.symbol}
+              name={company.companyName}
+              profit={company.changePercent}
+            />
+          ))
+        ) : (
+          <p>Nenhuma empresa recente.</p>
+        )}
       </S.Carousel>
     </S.Container>
   )

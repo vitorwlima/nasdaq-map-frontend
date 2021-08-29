@@ -31,17 +31,21 @@ const Dashboard: NextPage = () => {
     } else {
       const getQuotes = async () => {
         const quote = user.recentCompanies[0]
-        const quoteResponse = await iexApi.get(`/stable/stock/${quote}/quote?token=${process.env.NEXT_PUBLIC_API_KEY}`)
-        const intradayQuoteResponse = await iexApi.get<IIntradayPrices>(
-          `/stable/stock/${quote}/intraday-prices?token=${process.env.NEXT_PUBLIC_API_KEY}`
-        )
-        if (intradayQuoteResponse.data && quoteResponse.data) {
-          dispatch(
-            setQuoteInfo({
-              quote: quoteResponse.data,
-              intradayQuote: intradayQuoteResponse.data.filter(item => item.close !== null),
-            })
+        if (quote) {
+          const quoteResponse = await iexApi.get(
+            `/stable/stock/${quote}/quote?token=${process.env.NEXT_PUBLIC_API_KEY}`
           )
+          const intradayQuoteResponse = await iexApi.get<IIntradayPrices>(
+            `/stable/stock/${quote}/intraday-prices?token=${process.env.NEXT_PUBLIC_API_KEY}`
+          )
+          if (intradayQuoteResponse.data && quoteResponse.data) {
+            dispatch(
+              setQuoteInfo({
+                quote: quoteResponse.data,
+                intradayQuote: intradayQuoteResponse.data.filter(item => item.close !== null),
+              })
+            )
+          }
         }
       }
 

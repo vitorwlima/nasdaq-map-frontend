@@ -75,14 +75,18 @@ export const MainMenu = () => {
           <Image src={FilledStar} width='24' height='24' alt='estrela' />
           <h4>Empresas favoritas</h4>
         </div>
-        {favoriteCompanies.map(company => (
-          <FavoriteCompanyCard
-            key={company.symbol}
-            symbol={company.symbol}
-            name={company.companyName}
-            profit={company.changePercent}
-          />
-        ))}
+        {favoriteCompanies.length ? (
+          favoriteCompanies.map(company => (
+            <FavoriteCompanyCard
+              key={company.symbol}
+              symbol={company.symbol}
+              name={company.companyName}
+              profit={company.changePercent}
+            />
+          ))
+        ) : (
+          <p>Nenhuma empresa favorita adicionada.</p>
+        )}
       </S.FavoriteCompanies>
     </S.Container>
   )
