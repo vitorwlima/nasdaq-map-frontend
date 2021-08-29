@@ -10,6 +10,7 @@ import TrashIcon from '../../assets/trash.svg'
 import api from '../../services/api'
 import { useAppDispatch } from '../../hooks'
 import { setUser } from '../../state/slices/UserSlice'
+import { setOpenMenu } from '../../state/slices/MenuSlice'
 
 type IFavoriteCompanyCardProps = {
   symbol: string
@@ -32,8 +33,9 @@ export const FavoriteCompanyCard = ({ symbol, name, profit, logo }: IFavoriteCom
   }, [dispatch, symbol])
 
   const handleRedirect = useCallback(() => {
+    dispatch(setOpenMenu(false))
     router.push(`/dashboard/${symbol}`)
-  }, [symbol, router])
+  }, [symbol, router, dispatch])
 
   return (
     <S.Container>
