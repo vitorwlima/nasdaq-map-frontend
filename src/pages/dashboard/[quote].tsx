@@ -1,6 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
+import { useState } from 'react'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IQuote, IIntradayPrices } from '../../interfaces'
@@ -20,12 +21,15 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
   const user = useAppSelector(state => state.userReducer.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
+  const [hasUpdated, setHasUpdated] = useState(false)
 
   useEffect(() => {
     if (!user) {
       const authenticateByRefresh = async () => {
         try {
           const { data } = await api.get('/refresh-token')
+          console.log(data)
+          api.defaults.headers['Authorization'] = `Bearer ${data.token}`
           dispatch(setUser(data))
         } catch {
           router.push('/login')
@@ -34,15 +38,32 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
 
       authenticateByRefresh()
     }
+  }, [user, dispatch, router])
 
+  useEffect(() => {
     if (error) {
       console.log(error)
       router.push('/dashboard')
       return
     }
 
+    setHasUpdated(false)
     dispatch(setQuoteInfo({ quote, intradayQuote: intradayQuote.filter(item => item.close !== null) }))
-  }, [user, dispatch, router, quote, intradayQuote, error])
+  }, [error, dispatch, quote, intradayQuote, router])
+
+  useEffect(() => {
+    if (user && !hasUpdated) {
+      const registerRecentCompany = async () => {
+        try {
+          const { data } = await api.post('/recent-company', { quote: quote.symbol })
+          dispatch(setUser(data))
+          setHasUpdated(true)
+        } catch {}
+      }
+
+      registerRecentCompany()
+    }
+  }, [dispatch, quote.symbol, user, hasUpdated])
 
   return (
     <>
