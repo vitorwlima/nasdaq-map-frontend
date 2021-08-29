@@ -12,6 +12,7 @@ export const Container = styled.div<ContainerProps>`
   padding: ${theme.spacing.small};
   box-shadow: 0 8px 20px rgba(43, 37, 63, 0.1);
   border-radius: ${theme.radius.medium};
+  background-color: ${theme.color.white};
 
   .info {
     flex: 1;
