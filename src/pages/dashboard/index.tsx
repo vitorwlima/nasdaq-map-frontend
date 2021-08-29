@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import { useEffect } from 'react'
+import { Loader } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IIntradayPrices } from '../../interfaces'
 import api from '../../services/api'
@@ -54,7 +55,7 @@ const Dashboard: NextPage = () => {
         <title>Nasdaq Map | Dashboard</title>
         <meta name='description' content='Dashboard aplicação Nasdaq Map' />
       </Head>
-      {user ? <HomeTemplate /> : <div>carregando...</div>}
+      {user ? <HomeTemplate /> : <Loader />}
     </>
   )
 }

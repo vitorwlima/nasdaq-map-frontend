@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import { useEffect, useRef } from 'react'
-import { ErrorToast } from '../../components'
+import { ErrorToast, Loader } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IQuote, IIntradayPrices } from '../../interfaces'
 import api from '../../services/api'
@@ -70,7 +70,7 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
         <title>Nasdaq Map | Dashboard</title>
         <meta name='description' content='Dashboard aplicação Nasdaq Map' />
       </Head>
-      {user ? <HomeTemplate /> : <div>carregando...</div>}
+      {user ? <HomeTemplate /> : <Loader />}
     </>
   )
 }
