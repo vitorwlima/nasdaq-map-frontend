@@ -9,7 +9,7 @@ import { FormHandles, SubmitHandler } from '@unform/core'
 import * as Yup from 'yup'
 
 import { getValidationErrors } from '../../utils'
-import { Button, Input } from '../../components/'
+import { Button, ErrorToast, Input } from '../../components/'
 import * as S from './styles'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import api from '../../services/api'
@@ -60,7 +60,11 @@ const Login: NextPage = () => {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err)
         formRef.current?.setErrors(errors)
+        return
       }
+
+      const errorMessage = (err.response && err.response.data && err.response.data.error) || 'Ocorreu um erro.'
+      ErrorToast({ errorMessage })
     }
   }
 
