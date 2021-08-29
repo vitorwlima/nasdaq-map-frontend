@@ -28,17 +28,19 @@ export const Chart = () => {
         <S.AssetInfo>
           <FavoriteButton quote={quote.symbol} />
           <div className='info'>
-            <h4>{quote?.symbol}</h4>
-            <span>{quote?.companyName}</span>
+            <h4>{quote.symbol}</h4>
+            <span>{quote.companyName}</span>
           </div>
         </S.AssetInfo>
         <S.AssetPrices isProfitable={isProfitable}>
           <div className='top'>
             <Image src={isProfitable ? GraphUpIcon : GraphDownIcon} width='20' height='20' alt='ícone gráfico' />
-            <h4>${quote?.latestPrice}</h4>
+            <h4>${quote.latestPrice}</h4>
           </div>
           <div className='bottom'>
-            ${quote?.change} ({quote?.changePercent}%)
+            ${isProfitable ? '+' : '-'}
+            {quote.change} ({isProfitable ? '+' : '-'}
+            {quote?.changePercent}%)
           </div>
         </S.AssetPrices>
       </S.Header>
