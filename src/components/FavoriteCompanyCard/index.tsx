@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/dist/client/router'
 
 import * as S from './styles'
-import TwitterLogo from '../../assets/companies/twitter.svg'
 import GraphUp from '../../assets/graph-up.svg'
 import GraphDown from '../../assets/graph-down.svg'
 import TrashIcon from '../../assets/trash.svg'
@@ -11,6 +10,7 @@ import api from '../../services/api'
 import { useAppDispatch } from '../../hooks'
 import { setUser } from '../../state/slices/UserSlice'
 import { setOpenMenu } from '../../state/slices/MenuSlice'
+import { setLoaderOpen } from '../../state/slices/LoaderSlice'
 
 type IFavoriteCompanyCardProps = {
   symbol: string
@@ -34,6 +34,7 @@ export const FavoriteCompanyCard = ({ symbol, name, profit, logo }: IFavoriteCom
 
   const handleRedirect = useCallback(() => {
     dispatch(setOpenMenu(false))
+    dispatch(setLoaderOpen(true))
     router.push(`/dashboard/${symbol}`)
   }, [symbol, router, dispatch])
 

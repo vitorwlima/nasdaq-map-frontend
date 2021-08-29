@@ -14,6 +14,8 @@ import FacebookLogo from '../../assets/companies/facebook.svg'
 import MicrosoftLogo from '../../assets/companies/microsoft.svg'
 import StarbucksLogo from '../../assets/companies/starbucks.svg'
 import TwitterLogo from '../../assets/companies/twitter.svg'
+import { useAppDispatch } from '../../hooks'
+import { setLoaderOpen } from '../../state/slices/LoaderSlice'
 
 type IRecentCompanyCardProps = {
   symbol: string
@@ -26,6 +28,7 @@ export const RecentCompanyCard = ({ symbol, name, profit, logo }: IRecentCompany
   const isProfitable = profit >= 0
   const router = useRouter()
   const [useLogo, setLogo] = useState(logo)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (symbol === 'ADBE') {
@@ -58,8 +61,9 @@ export const RecentCompanyCard = ({ symbol, name, profit, logo }: IRecentCompany
   }, [symbol])
 
   const handleRedirect = useCallback(() => {
+    dispatch(setLoaderOpen(true))
     router.push(`/dashboard/${symbol}`)
-  }, [router, symbol])
+  }, [router, symbol, dispatch])
 
   return (
     <S.Container isProfitable={isProfitable} onClick={handleRedirect}>

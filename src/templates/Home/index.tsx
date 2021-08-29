@@ -1,14 +1,23 @@
 import React from 'react'
 
 import * as S from './styles'
-import { Dashboard, MainMenu, NavigationMenu } from '../../components'
+import { Dashboard, Loader, MainMenu, NavigationMenu } from '../../components'
+import { useAppSelector } from '../../hooks'
 
 export const HomeTemplate = () => {
+  const isLoaderOpen = useAppSelector(state => state.loaderReducer.open)
+
   return (
-    <S.Container>
-      <NavigationMenu />
-      <Dashboard />
-      <MainMenu />
-    </S.Container>
+    <>
+      {isLoaderOpen ? (
+        <Loader />
+      ) : (
+        <S.Container>
+          <NavigationMenu />
+          <Dashboard />
+          <MainMenu />
+        </S.Container>
+      )}
+    </>
   )
 }

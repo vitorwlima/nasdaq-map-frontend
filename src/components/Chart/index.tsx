@@ -75,7 +75,6 @@ export const Chart = () => {
             interval={0}
             tickFormatter={value => {
               const isDivisibleByHalfHour = +value.split(':')[1] % 30 === 0
-              console.log(isDivisibleByHalfHour, value)
               if (isDivisibleByHalfHour) {
                 return value
               }

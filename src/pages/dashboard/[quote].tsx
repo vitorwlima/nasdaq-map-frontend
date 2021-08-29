@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks'
 import { IQuote, IIntradayPrices } from '../../interfaces'
 import api from '../../services/api'
 import iexApi from '../../services/iexApi'
+import { setLoaderOpen } from '../../state/slices/LoaderSlice'
 import { setQuoteInfo } from '../../state/slices/QuoteSlice'
 import { setUser } from '../../state/slices/UserSlice'
 import { HomeTemplate } from '../../templates'
@@ -24,6 +25,7 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
   const hasUpdated = useRef<boolean>(false)
 
   useEffect(() => {
+    dispatch(setLoaderOpen(false))
     if (!user) {
       const authenticateByRefresh = async () => {
         try {
