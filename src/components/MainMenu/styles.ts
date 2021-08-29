@@ -11,7 +11,7 @@ type NavigationItemProps = {
 }
 
 export const Container = styled.div<ContainerProps>`
-  min-width: 360px;
+  width: 400px;
   padding: ${theme.spacing.medium} ${theme.spacing.small};
 
   header {
@@ -26,7 +26,7 @@ export const Container = styled.div<ContainerProps>`
   }
 
   @media ${deviceMaxWidth.laptopM} {
-    min-width: unset;
+    width: 100vw;
     position: absolute;
     inset: 0;
     z-index: 1000;
