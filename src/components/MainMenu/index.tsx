@@ -12,6 +12,14 @@ import { setOpenMenu } from '../../state/slices/MenuSlice'
 import { IQuote } from '../../interfaces'
 import iexApi from '../../services/iexApi'
 
+import AdobeLogo from '../../assets/companies/adobe.svg'
+import AmazonLogo from '../../assets/companies/amazon.svg'
+import AppleLogo from '../../assets/companies/apple.svg'
+import FacebookLogo from '../../assets/companies/facebook.svg'
+import MicrosoftLogo from '../../assets/companies/microsoft.svg'
+import StarbucksLogo from '../../assets/companies/starbucks.svg'
+import TwitterLogo from '../../assets/companies/twitter.svg'
+
 type ICompany = IQuote & {
   logo: string
 }
@@ -27,13 +35,48 @@ export const MainMenu = () => {
     const getCompanies = async () => {
       const companies: ICompany[] = []
       for (let i = 0; companies.length < user.favoriteCompanies.length; i++) {
+        let logo
+
+        if (user.favoriteCompanies[i] === 'ADBE') {
+          logo = AdobeLogo
+        }
+
+        if (user.favoriteCompanies[i] === 'AMZN') {
+          logo = AmazonLogo
+        }
+
+        if (user.favoriteCompanies[i] === 'AAPL') {
+          logo = AppleLogo
+        }
+
+        if (user.favoriteCompanies[i] === 'FB') {
+          logo = FacebookLogo
+        }
+
+        if (user.favoriteCompanies[i] === 'MSFT') {
+          logo = MicrosoftLogo
+        }
+
+        if (user.favoriteCompanies[i] === 'SBUX') {
+          logo = StarbucksLogo
+        }
+
+        if (user.favoriteCompanies[i] === 'TWTR') {
+          logo = TwitterLogo
+        }
+
         const { data } = await iexApi.get<IQuote>(
           `/stable/stock/${user.favoriteCompanies[i]}/quote?token=${process.env.NEXT_PUBLIC_API_KEY}`
         )
-        const response = await iexApi.get(
-          `/stable/stock/${user.favoriteCompanies[i]}/logo?token=${process.env.NEXT_PUBLIC_API_KEY}`
-        )
-        companies.push({ ...data, logo: response.data.url })
+
+        if (!logo) {
+          const response = await iexApi.get(
+            `/stable/stock/${user.favoriteCompanies[i]}/logo?token=${process.env.NEXT_PUBLIC_API_KEY}`
+          )
+          logo = response.data.url
+        }
+
+        companies.push({ ...data, logo })
       }
 
       setFavoriteCompanies([])
