@@ -32,7 +32,7 @@ export const RecentCompanyCard = ({ symbol, name, profit, logo }: IRecentCompany
       </div>
       <div className='prices'>
         <span>
-          {isProfitable ? '+' : '-'}
+          {isProfitable && '+'}
           {profit.toFixed(2)}
         </span>
         <Image src={isProfitable ? GraphUp : GraphDown} width='16' height='16' alt='gráfico' />
