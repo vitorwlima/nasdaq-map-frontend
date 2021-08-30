@@ -5,7 +5,7 @@ import { Form } from '@unform/web'
 import * as S from './styles'
 import DashboardIcon from '../../assets/dashboard.svg'
 import SearchIcon from '../../assets/search.svg'
-import { Chart, Input, RecentCompanies } from '../'
+import { Chart, Input, RecentCompanies, News } from '../'
 import { useRouter } from 'next/dist/client/router'
 import { SubmitHandler } from '@unform/core'
 import { useAppDispatch } from '../../hooks'
@@ -36,6 +36,7 @@ export const Dashboard = () => {
       </Form>
       <Chart />
       <RecentCompanies />
+      <News />
     </S.Container>
   )
 }

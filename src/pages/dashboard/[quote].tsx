@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { useEffect, useRef } from 'react'
 import { ErrorToast, Loader } from '../../components'
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { IQuote, IIntradayPrices } from '../../interfaces'
+import { IQuote, IIntradayPrices, IQuoteNews } from '../../interfaces'
 import api from '../../services/api'
 import iexApi from '../../services/iexApi'
 import { setLoaderOpen } from '../../state/slices/LoaderSlice'
@@ -16,9 +16,10 @@ type DashboardProps = {
   quote: IQuote
   intradayQuote: IIntradayPrices
   error: string
+  quoteNews: IQuoteNews[]
 }
 
-const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) => {
+const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error, quoteNews }) => {
   const user = useAppSelector(state => state.userReducer.user)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -49,8 +50,8 @@ const Dashboard: NextPage<DashboardProps> = ({ quote, intradayQuote, error }) =>
     }
 
     hasUpdated.current = false
-    dispatch(setQuoteInfo({ quote, intradayQuote: intradayQuote.filter(item => item.close !== null) }))
-  }, [error, dispatch, quote, intradayQuote, router])
+    dispatch(setQuoteInfo({ quote, intradayQuote: intradayQuote.filter(item => item.close !== null), quoteNews }))
+  }, [error, dispatch, quote, intradayQuote, router, quoteNews])
 
   useEffect(() => {
     if (user && !hasUpdated.current && !error) {
@@ -86,8 +87,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     const intradayQuoteResponse = await iexApi.get(
       `/stable/stock/${quote}/intraday-prices?token=${process.env.NEXT_PUBLIC_API_KEY}`
     )
+    const quoteNews = await iexApi(`/stable/stock/${quote}/news/last?token=${process.env.NEXT_PUBLIC_API_KEY}`)
     return {
-      props: { quote: quoteResponse.data, intradayQuote: intradayQuoteResponse.data },
+      props: { quote: quoteResponse.data, intradayQuote: intradayQuoteResponse.data, quoteNews: quoteNews.data },
     }
   } catch {
     return {
